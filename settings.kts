@@ -1,32 +1,38 @@
+import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
 
-import jetbrains.buildServer.configs.kotlin.v2025.07.*
-import jetbrains.buildServer.configs.kotlin.v2025.07.project
-import jetbrains.buildServer.configs.kotlin.v2025.07.buildSteps.*
-
-version = "2025.07" // Specifies the TeamCity server version
+version = "2025.07" // Specify the TeamCity version
 
 project {
-    name = "Jenkins_Demo" // Name of the TeamCity project
+    buildType(HelloWorld) // Reference the build type defined below
+}
 
-    vcsRoot(DslContext.settingsRoot) // Uses the VCS root where the settings.kts file resides
+object HelloWorld : BuildType({
+    id("JenkinsDemo_Build") // Unique ID for the build configuration
+    name = "Demo" // Display name in TeamCity UI
 
-    buildType {
-        name = "JenkinsDemo_Build // Name of the build configuration
-        id = RelativeId("JenkinsDemo_Build") // Unique ID for the build configuration
-
-        steps {
-            // Define a build step, e.g., running a shell script
-            script {
-                name = "Run Tests"
-                scriptContent = "echo 'Running tests...'" // Simple shell command
-            }
-        }
-
-        triggers {
-            // Define a trigger, e.g., a VCS trigger to run on changes
-            vcs {
-                triggerRules = "" // Empty rules mean it triggers on any VCS change
-            }
+    steps {
+        script {
+            name = "Echo Hello"
+            scriptContent = "echo 'Hello world!'" // Simple shell script step
         }
     }
-}
+
+    triggers {
+        vcs {
+            // Trigger the build on changes in the associated VCS root
+        }
+    }
+
+    requirements {
+        // Define agent requirements, e.g., system.os = "Linux"
+    }
+
+    features {
+        // Add build features, e.g., commit status publisher
+    }
+
+    params {
+        // Define build parameters, e.g., text("myParam", "defaultValue")
+    }
+})
