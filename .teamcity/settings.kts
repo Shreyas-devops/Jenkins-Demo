@@ -1,35 +1,36 @@
-
 import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildFeatures.notifications
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 
-version = "2025.07" // Specify the TeamCity version
+object Build : BuildType({
+    name = "Build"
 
-project {
-    buildType(HelloWorld) // Reference the build type defined below
-}
-
-object HelloWorld : BuildType({
-    id("JenkinsDemo_Build") // Unique ID for the build configuration
-    name = "Demo" // Display name in TeamCity UI
+    publishArtifacts = PublishMode.SUCCESSFUL
 
     steps {
         script {
-            name = "Echo Hello"
-            scriptContent = "echo 'Hello world!'" // Simple shell script step
+            name = "Build"
+            id = "Build"
+            scriptContent = """echo "THIS IS BUILD STAGE""""
+        }
+        script {
+            name = "Test"
+            id = "Test"
+            scriptContent = """echo "THIS IS TEST TAGE""""
+        }
+        script {
+            name = "Deploy"
+            id = "Deploy"
+            scriptContent = """echo "THIS IS DEPLOY""""
         }
     }
-
-    
-
-    requirements {
-        // Define agent requirements, e.g., system.os = "Linux"
+features {
+    notifications {
+        notifierSettings = emailNotifier {
+            email = "shreyas.aws.devops@gmail.com"
+        }
+        buildFailed = true
+        buildFinishedSuccessfully = true
     }
-
-    features {
-        // Add build features, e.g., commit status publisher
-    }
-
-    params {
-        // Define build parameters, e.g., text("myParam", "defaultValue")
-    }
+}
 })
