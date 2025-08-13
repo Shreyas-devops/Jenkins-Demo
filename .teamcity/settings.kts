@@ -3,7 +3,7 @@ import jetbrains.buildServer.configs.kotlin.buildFeatures.notifications
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 
 object Build : BuildType({
-    name = "Build"
+    name = "JenkinsDemo"
 
     publishArtifacts = PublishMode.SUCCESSFUL
 
