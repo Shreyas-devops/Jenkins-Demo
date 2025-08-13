@@ -1,3 +1,7 @@
+
+import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
+
 version = "2025.07" // Specify the TeamCity version
 
 project {
