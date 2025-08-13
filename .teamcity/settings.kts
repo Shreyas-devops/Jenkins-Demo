@@ -19,11 +19,7 @@ object HelloWorld : BuildType({
         }
     }
 
-    triggers {
-        vcs {
-            // Trigger the build on changes in the associated VCS root
-        }
-    }
+    
 
     requirements {
         // Define agent requirements, e.g., system.os = "Linux"
