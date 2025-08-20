@@ -13,6 +13,7 @@ pipeline {
                sh 'pwd'
                sh 'ls'
                sh 'cat  Jenkinsfile'
+               sh 'bash' 
                 
             }
         }
