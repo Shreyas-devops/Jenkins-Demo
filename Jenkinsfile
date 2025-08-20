@@ -9,8 +9,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
-                systemctl status docker
+                sudo systemctl status docker
+                
             }
         }
         stage('Deploy') {
