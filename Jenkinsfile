@@ -10,7 +10,9 @@ pipeline {
         stage('Test') {
             steps {
                sh 'echo "Testing"'
+               sh 'pwd'
                sh 'ls'
+               sh 'cat  Jenkinsfile'
                 
             }
         }
